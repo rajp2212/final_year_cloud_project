@@ -1,0 +1,48 @@
+
+.container {
+    /* margin: 0 auto; */
+    width: 740px;
+    max-width: 100%;
+ 
+  }
+  .list {
+    list-style: none;
+ 
+
+  }
+  
+  .list-item {
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid gray;
+    border-radius: 8px;
+    background-color: white;
+    margin: 18px;
+    padding: 1.5rem;
+    border-radius: 15px;
+    width:100%;
+  }
+  
+  .list-item a {
+    font-size: 2rem;
+    text-decoration: none;
+    color: #1c2022;
+    
+  }
+  
+  .card {
+    background-color: white;
+    margin: 8px;
+    padding: 2rem;
+    border-radius: 4px;
+  }
+
+
+  .s-bar{
+    border: 2px solid #1c2022;
+    margin: 30px;
+    border-radius: 50px;
+    width: 70%;
+    
+    box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
+  }
