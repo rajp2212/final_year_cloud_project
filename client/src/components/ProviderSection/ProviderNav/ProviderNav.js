@@ -6,16 +6,12 @@ import { useDispatch } from 'react-redux';
 
 
 
-const Navbar = () => {
+const ProviderNav = () => {
 
   const history=useHistory();
   const dispatch=useDispatch();
   const classes = useStyles();
-  
-  const [user, setUser] = useState(null);
-  /* if(localStorage.getItem('profile')){
-    setUser(JSON.parse(localStorage.getItem('profile')))
-  } */
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   /*  console.log(user); */
 
   const logout=()=>{
@@ -24,42 +20,39 @@ const Navbar = () => {
       setUser(null);
   }
 
- /*  useEffect(() => {
+  useEffect(() => {
     const token = user?.token;
     setUser(JSON.parse(localStorage.getItem('profile')));
 
 
   },[]);
- */
+
 
   return (
     <>
       <AppBar className={classes.appBar} position='static' color='inherit' >
         <div className={classes.brandContainer} >
-          <Typography component={Link} to="/" className={classes.heading} variant='h2' >Cloud Services</Typography>
-          
+          <Typography component={Link} to="/" className={classes.heading} variant='h4' >Service Provider Section</Typography>
+          </div>
 
+          <div className={classes.brandContainer} >
+          <Button component={Link} to="/ProviderHome" className="button-30" variant='outlined' >Home</Button>
+          <Button component={Link} to="/ProviderHome/updateqos" className="button-30" variant='outlined' >Update QoS</Button>
+          </div>
+          <Toolbar className={classes.toolbar} >
           
-            {
-              user ? (
                 <div className={classes.profile} >
-                  <Avatar className={classes.purple} alt={user.result.name} src={user.result.picture} >{user.result.name}</Avatar>
+                  <Avatar className={classes.purple} alt={user.result.name} src={user.result.picture} >{user.result.userName}</Avatar>
                   <Typography variant='h6' className={classes.userName} >{user.result.name}</Typography>
                   <Button variant='contained' className={classes.logout} color="secondary" onClick={logout} >Logout</Button>
                 </div>
-              ) : (
-                <div className={classes.pro}>
-                  <Button component={Link} to="/authUser" class="button-30" role="button">User Section</Button>
-                  <Button component={Link} to="/authProvider" class="button-30" role="button" >Service Provider</Button>
-                </div>
-              )
-            }
-           
-          
-          </div>
+              
+            
+          </Toolbar>
+        
       </AppBar>
     </>
   )
 }
 
-export default Navbar
+export default ProviderNav

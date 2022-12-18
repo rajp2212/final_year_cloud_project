@@ -45,6 +45,16 @@ export default makeStyles((theme) => ({
       justifyContent: 'center',
     },
   },
+  pro: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginLeft:"90px",
+    [theme.breakpoints.down('sm')]: {
+      width: 'auto',
+      marginTop: 20,
+      justifyContent: 'center',
+    },
+  },
   logout: {
     marginLeft: '20px',
   },

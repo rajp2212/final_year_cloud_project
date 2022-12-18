@@ -17,7 +17,7 @@ export default makeStyles((theme) => ({
   heading: {
     color: '#3f51b5',
     textDecoration: 'none',
-    width:"100px",
+
     fontWeight: 460,
     
   },
@@ -29,7 +29,7 @@ export default makeStyles((theme) => ({
   toolbar: {
     display: 'flex',
     justifyContent: 'flex-end',
-    width: '400px',
+    width: '500px',
     [theme.breakpoints.down('sm')]: {
       width: 'auto',
     },

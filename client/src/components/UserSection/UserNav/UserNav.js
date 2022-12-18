@@ -33,10 +33,13 @@ const UserNav = () => {
       <AppBar className={classes.appBar} position='static' color='inherit' >
         <div className={classes.brandContainer} >
           <Typography component={Link} to="/" className={classes.heading} variant='h4' >User Section</Typography>
+          
           </div>
 
           <div className={classes.brandContainer} >
           <Button component={Link} to="/userHome" className="button-30" variant='outlined' >User Home</Button>
+          <Button component={Link} to="/userHome/myresources" className="button-30" variant='outlined' >My Resources</Button>
+          <Button component={Link} to="/userHome/filter" className="button-30" variant='outlined' >Service Filtering</Button>
           </div>
           <Toolbar className={classes.toolbar} >
           

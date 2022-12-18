@@ -17,7 +17,7 @@ const Rankings = () => {
         {data.map( (item) => (
           <li key={item.id} id={item.id} className="list-item">
           
-            <Link to={`/${item.id}`}><img src={item.img} alt={item.name} />{item.name}</Link>
+            <Link to={`/resource/${item.id}`}><img src={item.img} alt={item.name} />{item.name}</Link>
             <h4>₹{item.cost}/month</h4>
           </li>
         ))}

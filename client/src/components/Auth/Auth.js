@@ -58,8 +58,8 @@ const Auth = () => {
   }
   
   
-  const googleSuccess= async (res)=>{
-    /* console.log(res); */
+  /* const googleSuccess= async (res)=>{
+    console.log(res);
     console.log(jwtDecode(res.credential));
     
     var result=jwtDecode(res?.credential);
@@ -73,7 +73,7 @@ const Auth = () => {
       
       
     }
-  }
+  } */
 
  /*  const googleFailure=(error)=>{
      console.log(error);
@@ -82,9 +82,9 @@ const Auth = () => {
       
   } */
 
-  useEffect(() => {
+  /* useEffect(() => {
     
-     /* global google */
+     global google
     google.accounts.id.initialize({
       client_id:"979501484813-ohkedireefp4gbt35s176lduf5gsc8do.apps.googleusercontent.com",
       callback: googleSuccess,
@@ -94,7 +94,7 @@ const Auth = () => {
     google.accounts.id.renderButton( document.getElementById('signInDiv') ,{
        size: "large",shape: "square",theme: "filled_blue", width: "360"	
     })
-  }, [])
+  }, []) */
   
 
   return (
@@ -128,7 +128,7 @@ const Auth = () => {
               </Grid>
               <Button color='primary' onClick={handleSubmit}  variant='contained' className={classes.submit} type='submit' fullWidth  >{ isSignup ? 'Sign Up' : 'Sign In'}</Button>
               
-              <Button id='signInDiv' type='submit' onClick={handleSubmit} className={classes.googleButton} color='primary' fullWidth  ></Button>  
+             {/*  <Button id='signInDiv' type='submit' onClick={handleSubmit} className={classes.googleButton} color='primary' fullWidth  ></Button> */}  
               
               {/* <GoogleLogin
                 clientId='757937043836-8af40i60455nuf5co198r36ciskogkv8.apps.googleusercontent.com'

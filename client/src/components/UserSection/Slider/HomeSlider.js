@@ -14,31 +14,31 @@ const content = [
 		path:"filter",
 		button: 'Discover',
 		image: 'https://i.imgur.com/ZXBtVw7.jpg',
-		user: 'AWS',
+		user: '',
 		userProfile: 'https://i.imgur.com/JSW6mEk.png'
 	},
 	{
 		title: 'Resource controller',
-		path:"ranks",
+		path:"myresources",
 		button: 'Discover',
 		image: 'https://i.imgur.com/DCdBXcq.jpg',
-		user: 'SalesForce',
+		user: '',
 		userProfile: 'https://i.imgur.com/0Clfnu7.png'
 	},
 	{
 		title: 'Search for service providers',
-		path:"search",
+		path:"filter",
 		button: 'Search',
 		image: 'https://i.imgur.com/DCdBXcq.jpg',
-		user: 'Rateeval',
+		user: '',
 		userProfile: 'https://i.imgur.com/JSW6mEk.png'
 	},
 	{
 		title: 'Rankings',
-		path:"ranks",
+		path:"filter",
 		button: 'Discover',
 		image: 'https://i.imgur.com/DCdBXcq.jpg',
-		user: 'Azure',
+		user: '',
 		userProfile: 'https://i.imgur.com/0Clfnu7.png'
 	},
 	

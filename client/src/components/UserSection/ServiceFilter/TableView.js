@@ -1,9 +1,11 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import styled from 'styled-components'
 import { useTable, useFilters, useGlobalFilter, useAsyncDebounce } from 'react-table'
+import {CircularProgress } from '@material-ui/core';
 // A great library for fuzzy filtering/sorting items
 import matchSorter from 'match-sorter'
-
+import { fetchData } from '../../../api/index';
+import { Link } from "react-router-dom";
 import data from '../ProviderData'
 
 const Styles = styled.div`
@@ -319,7 +321,15 @@ function Table({ columns, data }) {
     </>
   )
 }
-
+function NavLinkButton({
+  row,
+  }) { 
+    /* console.log(row.original); */
+    
+    return (
+        <Link to={`/resource/${row.original._id}`}>{row.original.name}</Link >
+    )
+  }
 // Define a custom filter filter function!
 function filterGreaterThan(rows, id, filterValue) {
   return rows.filter(row => {
@@ -335,6 +345,21 @@ function filterGreaterThan(rows, id, filterValue) {
 filterGreaterThan.autoRemove = val => typeof val !== 'number'
 
 function TableView() {
+  const [newData, setnewData] = useState([])
+  const getData=async()=>{
+    try {
+      let val  = await fetchData();
+     /*  console.log(val.data); */
+      
+      setnewData(val.data);
+      
+      
+    } catch (error) {
+        console.log(error);
+    }
+  }
+  /* console.log(newData); */
+  
   const columns = React.useMemo(
     () => [
       {
@@ -343,6 +368,8 @@ function TableView() {
           {
             Header: 'Name',
             accessor: 'name',
+            Cell: NavLinkButton
+
           },
         ],
       },
@@ -350,7 +377,7 @@ function TableView() {
         Header: 'Info',
         columns: [
           {
-            Header: 'Cost',
+            Header: 'Cost (int ₹)',
             accessor: 'cost',
             Filter: NumberRangeColumnFilter,
             filter: 'between',
@@ -362,19 +389,19 @@ function TableView() {
             filter: 'includes',
           },
           {
-            Header: 'Availability',
-            accessor: 'availability',
+            Header: 'BandWidth (in Mbps)',
+            accessor: 'network_bandwidth',
             Filter: SliderColumnFilter,
             filter: filterGreaterThan,
           },
           {
-            Header: 'Usability',
-            accessor: 'usability',
-            Filter: SelectColumnFilter,
-            filter: 'includes',
+            Header: 'Virtual Machines',
+            accessor: 'available_VM',
+            Filter: SliderColumnFilter,
+            filter: filterGreaterThan,
           },
           {
-            Header: 'Response Time',
+            Header: 'Response Time (in ms)',
             accessor: 'response_time',
             Filter: SliderColumnFilter,
             filter: filterGreaterThan,
@@ -391,10 +418,16 @@ function TableView() {
     []
   )
 
+useEffect(() => {
+  getData();
+}, [])
 
   return (
     <Styles style={{ backgroundColor:"white",marginTop:"50px", borderRadius:"20px",boxShadow: "rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px" }} >
-      <Table columns={columns} data={data} />
+      
+      {
+        !newData.length ? <CircularProgress /> : (
+        <Table columns={columns} data={newData} />)}
     </Styles>
   )
 }
