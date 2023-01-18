@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API=axios.create({baseURL:"https://final-year-cloud-server-raj-ka.onrender.com/register"});
+const API=axios.create({baseURL:"https://cloud-service-broker-servernew.onrender.com/register"});
 
 export const signIn=(formData)=> API.post('/signinuser',formData);
 export const signUp=(formData)=> API.post('/signupuser',formData);
