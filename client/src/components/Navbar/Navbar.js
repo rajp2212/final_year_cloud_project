@@ -49,8 +49,8 @@ const Navbar = () => {
                 </div>
               ) : (
                 <div className={classes.pro}>
-                  <Button component={Link} to="/authUser" class="button-30" role="button">User Section</Button>
-                  <Button component={Link} to="/authProvider" class="button-30" role="button" >Service Provider</Button>
+                  <Button component={Link} to="/authUser" class="button-30" role="button">Primary Broker</Button>
+                  <Button component={Link} to="/authProvider" class="button-30" role="button" >Secondary Broker </Button>
                 </div>
               )
             }

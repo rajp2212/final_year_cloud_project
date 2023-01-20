@@ -121,7 +121,7 @@ const SLAuserEnd = () => {
             </MDBModalBody>
 
             <MDBModalFooter>
-            <h5 style={{textAlign:"left"}}>  Total SLA Acceptance = <b>{Math.floor((Math.random() * 100) + 1)}%</b></h5>
+            <h5 style={{textAlign:"left"}}>  Total SLA Matching = <b>{Math.floor((Math.random() * 100) + 1)}%</b></h5>
               <Link to="/userHome/filter">
               <MDBBtn color='secondary' >
                 Close
