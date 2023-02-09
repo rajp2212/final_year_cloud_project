@@ -16,22 +16,37 @@ import {
   MDBCardBody,
   MDBCardImage,
   MDBBtn,
-  MDBListGroup,
-  MDBDropdownToggle,
-  MDBDropdown,
-  MDBDropdownItem,
-  MDBDropdownMenu,
+
   MDBAccordion, MDBAccordionItem
 
 } from 'mdb-react-ui-kit';
+import SLAForm from './SLAForm';
 const SLAuserEnd = () => {
+  const options = ["100%", ">50%", "<50%"];
+
+  function getRandomOption() {
+    const randomNumber = Math.random();
+    if (randomNumber < 0.33) {
+      return options[0];
+    } else if (randomNumber < 0.66) {
+      return options[1];
+    } else {
+      return options[2];
+    }
+  }
+
+
   const [basicModal, setBasicModal] = useState(true)
   const toggleShow = () => setBasicModal(!basicModal);
+  const [basicModal1, setBasicModal1] = useState(true)
+  const toggleShow1 = () => setBasicModal1(!basicModal1);
   return (
     <>
       <MDBModal staticBackdrop tabIndex='-1' show={basicModal} setShow={setBasicModal} >
+      <SLAForm basicModal={basicModal1} setBasicModal={setBasicModal1} toggleShow={toggleShow1} />
         <MDBModalDialog scrollable size='xl' >
-          <MDBModalContent >
+        
+          {!basicModal1 && (<MDBModalContent >
             <MDBModalHeader>
               <MDBModalTitle> <strong>Service-Level Agreement</strong> </MDBModalTitle>
               <Link to="/userHome/filter"><MDBBtn className='btn-close' color='none' onClick={toggleShow} ></MDBBtn></Link>
@@ -121,7 +136,7 @@ const SLAuserEnd = () => {
             </MDBModalBody>
 
             <MDBModalFooter>
-            <h5 style={{textAlign:"left"}}>  Total SLA Matching = <b>{Math.floor((Math.random() * 100) + 1)}%</b></h5>
+            <h5 style={{textAlign:"left"}}>  Total SLA Matching is <b>{getRandomOption()}</b></h5>
               <Link to="/userHome/filter">
               <MDBBtn color='secondary' >
                 Close
@@ -132,7 +147,7 @@ const SLAuserEnd = () => {
 
 
             </MDBModalFooter>
-          </MDBModalContent>
+          </MDBModalContent>)}
         </MDBModalDialog>
       </MDBModal>
     </>
