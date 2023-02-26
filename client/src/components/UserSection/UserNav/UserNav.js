@@ -40,6 +40,7 @@ const UserNav = () => {
           <Button component={Link} to="/userHome" className="button-30" variant='outlined' >User Home</Button>
           <Button component={Link} to="/userHome/myresources" className="button-30" variant='outlined' >My Resources</Button>
           <Button component={Link} to="/userHome/filter" className="button-30" variant='outlined' >Service Filtering</Button>
+          <Button component={Link} to="/userHome/slaTemplate" className="button-30" variant='outlined' >SLA Template</Button>
           </div>
           <Toolbar className={classes.toolbar} >
           

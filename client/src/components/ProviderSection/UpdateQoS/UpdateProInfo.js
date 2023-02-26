@@ -63,7 +63,7 @@ const UpdateProInfo = () => {
                                     <Input value={formData.response_time} name="response_time" label='Response Time(in ms)' handleChange={handleChange} type="number" half />
                                     <Input value={formData.network_bandwidth} name="network_bandwidth" label='Bandwidth(in Mbps)' handleChange={handleChange} type="number" half />
                                     <Input value={formData.available_VM} name="available_VM" label='Available Virtual Machines' handleChange={handleChange} type="number" />
-                                    <InputLabel style={{margin:"17px"}} >Security Management *</InputLabel>
+                                    <InputLabel style={{margin:"17px",marginLeft:"200px"}} >Security Management *</InputLabel>
                                     <Select
                                         placeholder='Security'
                                         style={{ width: "290px", padding: "0.12rem", marginLeft: "60px",marginBottom:"10px"  }}
@@ -80,7 +80,7 @@ const UpdateProInfo = () => {
                                         <MenuItem value={"Medium"}>Medium</MenuItem>
                                         <MenuItem value={"Low"}>Low</MenuItem>
                                     </Select>
-                                    <InputLabel  style={{margin:"17px"}}  >Flexibility *</InputLabel>
+                                    <InputLabel  style={{margin:"17px",marginLeft:"200px"}}  >Flexibility *</InputLabel>
                                     <Select
                                         style={{ width: "290px", padding: "0.12rem", marginLeft: "60px" }}
                                         value={formData.flexibility}

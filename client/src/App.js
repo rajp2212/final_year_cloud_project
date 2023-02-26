@@ -1,4 +1,4 @@
-/* import { useEffect, useState } from 'react'; */
+import { useEffect, useState } from 'react';
 import { Container} from '@material-ui/core';
 import { BrowserRouter, Switch, Route  } from 'react-router-dom';
 import Home from './components/Home/Home';
@@ -12,6 +12,7 @@ import ProviderAuth from './components/ProviderSection/ProviderAuth/ProviderAuth
 import ProviderHome from './components/ProviderSection/ProviderHome';
 import UpdateProInfo from './components/ProviderSection/UpdateQoS/UpdateProInfo';
 import MyResources from './components/UserSection/MyResources/MyResources';
+import SLATemplate from './components/UserSection/SLATemplate/SLATemplate';
 
 const App = () => {
 
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/userHome/filter" exact component={ServiceFilter} />
           <Route path="/userHome/myresources" exact component={MyResources} />
           <Route path="/userHome/ranks" exact component={Rankings} />
+          <Route path="/userHome/slaTemplate" exact component={SLATemplate  } />
           <Route path="/resource/:id" exact component={Detail} />
           
         </Switch>

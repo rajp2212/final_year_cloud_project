@@ -1,13 +1,7 @@
-import React,{useState} from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  FormControl,
-  Select,
-  InputLabel,
-  MenuItem,
-  FormHelperText,
-  TextField,
-} from '@material-ui/core';
+import { DataContext } from '../SLAdata';
+import { MenuItem, Select, Box, Container, Avatar, Typography, Paper, Button, Grid, InputLabel } from '@material-ui/core'
 import { Link } from "react-router-dom";
 import {
   MDBCol,
@@ -24,7 +18,7 @@ import {
   MDBModalFooter,
   MDBCardBody,
   MDBCardImage,
-  MDBBtn,
+  MDBBtn, MDBInput,
 
   MDBAccordion, MDBAccordionItem
 
@@ -37,130 +31,284 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SLAForm({basicModal,setBasicModal,toggleShow}) {
+function SLAForm({ basicModal, setBasicModal, toggleShow }) {
   const classes = useStyles();
-  const [cpuArchitecture, setCpuArchitecture] = React.useState('');
-  const [cpuSpeed, setCpuSpeed] = React.useState('');
-  const [memory, setMemory] = React.useState('');
-  const [numCpu, setNumCpu] = React.useState('');
+  const { slaFormData, setSlaFormData } = useContext(DataContext);
 
+  /* const [formData, setFormData] = useState(slaData) */
   /* const [basicModal, setBasicModal] = useState(true)
   const toggleShow = () => setBasicModal(!basicModal); */
 
-  const handleChange = (event) => {
-    switch (event.target.name) {
-      case 'cpuArchitecture':
-        setCpuArchitecture(event.target.value);
-        break;
-      case 'cpuSpeed':
-        setCpuSpeed(event.target.value);
-        break;
-      case 'memory':
-        setMemory(event.target.value);
-        break;
-      case 'numCpu':
-        setNumCpu(event.target.value);
-        break;
-      default:
-        break;
-    }
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+
+    /* console.log(slaFormData); */
+
+
+
+
+
+  }
+  const handleChange = (e) => {
+    setSlaFormData({ ...slaFormData, [e.target.name]: e.target.value })
+
+
+
+
+  }
 
   return (
     <>
-    <MDBModal staticBackdrop tabIndex='0' show={basicModal} setShow={setBasicModal} >
+      <MDBModal staticBackdrop tabIndex='0' show={basicModal} setShow={setBasicModal} >
         <MDBModalDialog scrollable size='xl' >
           <MDBModalContent >
-<form>
-      <FormControl className={classes.formControl}>
-        <InputLabel id="cpuArchitecture-label">CPU Architecture</InputLabel>
-        <Select
-          labelId="cpuArchitecture-label"
-          id="cpuArchitecture"
-          name="cpuArchitecture"
-          value={cpuArchitecture}
-          onChange={handleChange}
-        >
-          <MenuItem value="extremely good">extremely good</MenuItem>
-          <MenuItem value="very good">very good</MenuItem>
-          <MenuItem value="good">good</MenuItem>
-          <MenuItem value="fair">fair</MenuItem>
-          <MenuItem value="bad">bad</MenuItem>
-          <MenuItem value="very bad">very bad</MenuItem>
-        </Select>
-        <FormHelperText>Select CPU architecture rating</FormHelperText>
-      </FormControl>
+            <MDBModalHeader>
+              <MDBModalTitle> <strong>Service-Level Agreement Template</strong> </MDBModalTitle>
+              <Link to="/userHome"><MDBBtn className='btn-close' color='none' onClick={toggleShow} ></MDBBtn></Link>
+            </MDBModalHeader>
+            <form onSubmit={handleSubmit} >
+              <Box display={'flex'} style={{ margin: "25px" }} >
+                <InputLabel style={{ margin: "25px" }}>CPU Capacity *</InputLabel>
+                <Select
 
-      <FormControl className={classes.formControl}>
-        <InputLabel id="cpuSpeed-label">CPU Speed</InputLabel>
-        <Select
-          labelId="cpuSpeed-label"
-          id="cpuSpeed"
-          name="cpuSpeed"
-          value={cpuSpeed}
-          onChange={handleChange}
-        >
-          <MenuItem value="extremely good">extremely good</MenuItem>
-          <MenuItem value="very good">very good</MenuItem>
-          <MenuItem value="good">good</MenuItem>
-          <MenuItem value="fair">fair</MenuItem>
-          <MenuItem value="bad">bad</MenuItem>
-          <MenuItem value="very bad">very bad</MenuItem>
-        </Select>
-        <FormHelperText>Select CPU Speed rating</FormHelperText>
-      </FormControl>
-      <FormControl className={classes.formControl}>
-        <InputLabel id="memory-label">Memory</InputLabel>
-        <Select
-          labelId="memory-label"
-          id="memory"
-          name="memory"
-          value={memory}
-          onChange={handleChange}
-        >
-          <MenuItem value="extremely good">extremely good</MenuItem>
-          <MenuItem value="very good">very good</MenuItem>
-          <MenuItem value="good">good</MenuItem>
-          <MenuItem value="fair">fair</MenuItem>
-          <MenuItem value="bad">bad</MenuItem>
-          <MenuItem value="very bad">very bad</MenuItem>
-        </Select>
-        <FormHelperText>Select CPU memory</FormHelperText>
-      </FormControl>
-      <FormControl className={classes.formControl}>
-        <InputLabel id="numCpu-label">Number of CPU</InputLabel>
-        <Select
-          labelId="numCpu-label"
-          id="numCpu"
-          name="numCpu"
-          value={numCpu}
-          onChange={handleChange}
-        >
-          <MenuItem value="extremely good">extremely good</MenuItem>
-          <MenuItem value="very good">very good</MenuItem>
-          <MenuItem value="good">good</MenuItem>
-          <MenuItem value="fair">fair</MenuItem>
-          <MenuItem value="bad">bad</MenuItem>
-          <MenuItem value="very bad">very bad</MenuItem>
-        </Select>
-        <FormHelperText>Select Number of CPU</FormHelperText>
-      </FormControl>
-    
-      
-      </form>
-      <MDBModalFooter>
-          
-              <Link to="/userHome/filter">
-              <MDBBtn color='secondary' >
-                Close
-              </MDBBtn>
-              </Link>
+                  value={slaFormData.cpu_capacity}
+                  label="CPU_Capacity"
+                  onChange={handleChange}
+                  name="cpu_capacity"
+                  variant='outlined'
 
-              <MDBBtn color='success' onClick={toggleShow}  >Submit</MDBBtn>
+                >
+                  <MenuItem value="None">None</MenuItem>
+                  <MenuItem value="Extremely High/ Extremely Good (EH/EG)">Extremely High/ Extremely Good (EH/EG)</MenuItem>
+                  <MenuItem value="Very High/Very Good (VH/VG)">Very High/Very Good (VH/VG)</MenuItem>
+                  <MenuItem value="Medium High/ Medium Good (MH/MG)">Medium High/ Medium Good (MH/MG)</MenuItem>
+                  <MenuItem value="Fair/Medium (F/M)">Fair/Medium (F/M)</MenuItem>
+                  <MenuItem value="Medium Low/Medium Bad (ML/MB)">Medium Low/Medium Bad (ML/MB)</MenuItem>
+                  <MenuItem value="Low/Bad (L/B)">Low/Bad (L/B)</MenuItem>
+                  <MenuItem value="Very Low/Very Bad (VL/VB)">Very Low/Very Bad (VL/VB)</MenuItem>
+                  <MenuItem value="Very Very Low/Very Very Bad (VVL/VVB)">Very Very Low/Very Very Bad (VVL/VVB)</MenuItem>
+                </Select>
+
+                <InputLabel style={{ margin: "25px" }} >Memory Size *</InputLabel>
+                <Select
+                  value={slaFormData.memory_size}
+                  label="Memory Size"
+                  onChange={handleChange}
+                  name="memory_size"
+                  variant='outlined'
+
+                >
+                  <MenuItem value="None">None</MenuItem>
+                  <MenuItem value="Extremely High/ Extremely Good (EH/EG)">Extremely High/ Extremely Good (EH/EG)</MenuItem>
+                  <MenuItem value="Very High/Very Good (VH/VG)">Very High/Very Good (VH/VG)</MenuItem>
+                  <MenuItem value="Medium High/ Medium Good (MH/MG)">Medium High/ Medium Good (MH/MG)</MenuItem>
+                  <MenuItem value="Fair/Medium (F/M)">Fair/Medium (F/M)</MenuItem>
+                  <MenuItem value="Medium Low/Medium Bad (ML/MB)">Medium Low/Medium Bad (ML/MB)</MenuItem>
+                  <MenuItem value="Low/Bad (L/B)">Low/Bad (L/B)</MenuItem>
+                  <MenuItem value="Very Low/Very Bad (VL/VB)">Very Low/Very Bad (VL/VB)</MenuItem>
+                  <MenuItem value="Very Very Low/Very Very Bad (VVL/VVB)">Very Very Low/Very Very Bad (VVL/VVB)</MenuItem>
+                </Select>
+
+              </Box>
+
+              <Box display={'flex'} style={{ margin: "25px" }} >
+                <InputLabel style={{ margin: "25px" }}>Boot Time *</InputLabel>
+                <Select
+
+                  value={slaFormData.boot_time}
+                  label="Boot time"
+                  onChange={handleChange}
+                  name="boot_time"
+                  variant='outlined'
+
+                >
+                  <MenuItem value="None">None</MenuItem>
+                  <MenuItem value="Extremely High/ Extremely Good (EH/EG)">Extremely High/ Extremely Good (EH/EG)</MenuItem>
+                  <MenuItem value="Very High/Very Good (VH/VG)">Very High/Very Good (VH/VG)</MenuItem>
+                  <MenuItem value="Medium High/ Medium Good (MH/MG)">Medium High/ Medium Good (MH/MG)</MenuItem>
+                  <MenuItem value="Fair/Medium (F/M)">Fair/Medium (F/M)</MenuItem>
+                  <MenuItem value="Medium Low/Medium Bad (ML/MB)">Medium Low/Medium Bad (ML/MB)</MenuItem>
+                  <MenuItem value="Low/Bad (L/B)">Low/Bad (L/B)</MenuItem>
+                  <MenuItem value="Very Low/Very Bad (VL/VB)">Very Low/Very Bad (VL/VB)</MenuItem>
+                  <MenuItem value="Very Very Low/Very Very Bad (VVL/VVB)">Very Very Low/Very Very Bad (VVL/VVB)</MenuItem>
+                </Select>
+
+                <InputLabel style={{ margin: "25px" }} >Scale up  *</InputLabel>
+                <Select
+
+                  value={slaFormData.scale_up}
+                  label="Scale up"
+                  onChange={handleChange}
+                  name="scale_up"
+                  variant='outlined'
+
+                >
+                  <MenuItem value="None">None</MenuItem>
+                  <MenuItem value="Extremely High/ Extremely Good (EH/EG)">Extremely High/ Extremely Good (EH/EG)</MenuItem>
+                  <MenuItem value="Very High/Very Good (VH/VG)">Very High/Very Good (VH/VG)</MenuItem>
+                  <MenuItem value="Medium High/ Medium Good (MH/MG)">Medium High/ Medium Good (MH/MG)</MenuItem>
+                  <MenuItem value="Fair/Medium (F/M)">Fair/Medium (F/M)</MenuItem>
+                  <MenuItem value="Medium Low/Medium Bad (ML/MB)">Medium Low/Medium Bad (ML/MB)</MenuItem>
+                  <MenuItem value="Low/Bad (L/B)">Low/Bad (L/B)</MenuItem>
+                  <MenuItem value="Very Low/Very Bad (VL/VB)">Very Low/Very Bad (VL/VB)</MenuItem>
+                  <MenuItem value="Very Very Low/Very Very Bad (VVL/VVB)">Very Very Low/Very Very Bad (VVL/VVB)</MenuItem>
+                </Select>
+
+              </Box>
+
+              <Box display={'flex'} style={{ margin: "25px" }} >
+                <InputLabel style={{ margin: "25px" }}>Scale down *</InputLabel>
+                <Select
+
+                  value={slaFormData.scale_down}
+                  label="Scale down"
+                  onChange={handleChange}
+                  name="scale_down"
+                  variant='outlined'
+
+                >
+                  <MenuItem value="None">None</MenuItem>
+                  <MenuItem value="Extremely High/ Extremely Good (EH/EG)">Extremely High/ Extremely Good (EH/EG)</MenuItem>
+                  <MenuItem value="Very High/Very Good (VH/VG)">Very High/Very Good (VH/VG)</MenuItem>
+                  <MenuItem value="Medium High/ Medium Good (MH/MG)">Medium High/ Medium Good (MH/MG)</MenuItem>
+                  <MenuItem value="Fair/Medium (F/M)">Fair/Medium (F/M)</MenuItem>
+                  <MenuItem value="Medium Low/Medium Bad (ML/MB)">Medium Low/Medium Bad (ML/MB)</MenuItem>
+                  <MenuItem value="Low/Bad (L/B)">Low/Bad (L/B)</MenuItem>
+                  <MenuItem value="Very Low/Very Bad (VL/VB)">Very Low/Very Bad (VL/VB)</MenuItem>
+                  <MenuItem value="Very Very Low/Very Very Bad (VVL/VVB)">Very Very Low/Very Very Bad (VVL/VVB)</MenuItem>
+                </Select>
+
+                <InputLabel style={{ margin: "25px" }} >Scale Up Time *</InputLabel>
+                <Select
+
+                  value={slaFormData.scale_up_time}
+                  label="Scale up Time"
+                  onChange={handleChange}
+                  name="scale_up_time"
+                  variant='outlined'
+
+                >
+                  <MenuItem value="None">None</MenuItem>
+                  <MenuItem value="Extremely High/ Extremely Good (EH/EG)">Extremely High/ Extremely Good (EH/EG)</MenuItem>
+                  <MenuItem value="Very High/Very Good (VH/VG)">Very High/Very Good (VH/VG)</MenuItem>
+                  <MenuItem value="Medium High/ Medium Good (MH/MG)">Medium High/ Medium Good (MH/MG)</MenuItem>
+                  <MenuItem value="Fair/Medium (F/M)">Fair/Medium (F/M)</MenuItem>
+                  <MenuItem value="Medium Low/Medium Bad (ML/MB)">Medium Low/Medium Bad (ML/MB)</MenuItem>
+                  <MenuItem value="Low/Bad (L/B)">Low/Bad (L/B)</MenuItem>
+                  <MenuItem value="Very Low/Very Bad (VL/VB)">Very Low/Very Bad (VL/VB)</MenuItem>
+                  <MenuItem value="Very Very Low/Very Very Bad (VVL/VVB)">Very Very Low/Very Very Bad (VVL/VVB)</MenuItem>
+                </Select>
+
+              </Box>
+              <Box display={'flex'} style={{ margin: "25px" }} >
+                <InputLabel style={{ margin: "25px" }}>Scale Down Time*</InputLabel>
+                <Select
+
+                  value={slaFormData.scale_down_time}
+                  label="Scale down Time"
+                  onChange={handleChange}
+                  name="scale_down_time"
+                  variant='outlined'
+
+                >
+                  <MenuItem value="None">None</MenuItem>
+                  <MenuItem value="Extremely High/ Extremely Good (EH/EG)">Extremely High/ Extremely Good (EH/EG)</MenuItem>
+                  <MenuItem value="Very High/Very Good (VH/VG)">Very High/Very Good (VH/VG)</MenuItem>
+                  <MenuItem value="Medium High/ Medium Good (MH/MG)">Medium High/ Medium Good (MH/MG)</MenuItem>
+                  <MenuItem value="Fair/Medium (F/M)">Fair/Medium (F/M)</MenuItem>
+                  <MenuItem value="Medium Low/Medium Bad (ML/MB)">Medium Low/Medium Bad (ML/MB)</MenuItem>
+                  <MenuItem value="Low/Bad (L/B)">Low/Bad (L/B)</MenuItem>
+                  <MenuItem value="Very Low/Very Bad (VL/VB)">Very Low/Very Bad (VL/VB)</MenuItem>
+                  <MenuItem value="Very Very Low/Very Very Bad (VVL/VVB)">Very Very Low/Very Very Bad (VVL/VVB)</MenuItem>
+                </Select>
+                <InputLabel style={{ margin: "25px" }} >Max configurable VMs*</InputLabel>
+                <Select
+
+                  value={slaFormData.max_vm_configure}
+                  label="Max configurable VMs for a user"
+                  onChange={handleChange}
+                  name="max_vm_configure"
+                  variant='outlined'
+
+                >
+                  <MenuItem value="None">None</MenuItem>
+                  <MenuItem value="Extremely High/ Extremely Good (EH/EG)">Extremely High/ Extremely Good (EH/EG)</MenuItem>
+                  <MenuItem value="Very High/Very Good (VH/VG)">Very High/Very Good (VH/VG)</MenuItem>
+                  <MenuItem value="Medium High/ Medium Good (MH/MG)">Medium High/ Medium Good (MH/MG)</MenuItem>
+                  <MenuItem value="Fair/Medium (F/M)">Fair/Medium (F/M)</MenuItem>
+                  <MenuItem value="Medium Low/Medium Bad (ML/MB)">Medium Low/Medium Bad (ML/MB)</MenuItem>
+                  <MenuItem value="Low/Bad (L/B)">Low/Bad (L/B)</MenuItem>
+                  <MenuItem value="Very Low/Very Bad (VL/VB)">Very Low/Very Bad (VL/VB)</MenuItem>
+                  <MenuItem value="Very Very Low/Very Very Bad (VVL/VVB)">Very Very Low/Very Very Bad (VVL/VVB)</MenuItem>
+                </Select>
+
+              </Box>
+
+              <Box display={'flex'} style={{ margin: "25px" }} >
+                <InputLabel style={{ margin: "25px" }}>Auto scaling *</InputLabel>
+                <Select
+
+                  value={slaFormData.auto_scaling}
+                  label="Auto Scaling"
+                  onChange={handleChange}
+                  name="auto_scaling"
+                  variant='outlined'
+
+                >
+                  <MenuItem value="None">None</MenuItem>
+                  <MenuItem value="Extremely High/ Extremely Good (EH/EG)">Extremely High/ Extremely Good (EH/EG)</MenuItem>
+                  <MenuItem value="Very High/Very Good (VH/VG)">Very High/Very Good (VH/VG)</MenuItem>
+                  <MenuItem value="Medium High/ Medium Good (MH/MG)">Medium High/ Medium Good (MH/MG)</MenuItem>
+                  <MenuItem value="Fair/Medium (F/M)">Fair/Medium (F/M)</MenuItem>
+                  <MenuItem value="Medium Low/Medium Bad (ML/MB)">Medium Low/Medium Bad (ML/MB)</MenuItem>
+                  <MenuItem value="Low/Bad (L/B)">Low/Bad (L/B)</MenuItem>
+                  <MenuItem value="Very Low/Very Bad (VL/VB)">Very Low/Very Bad (VL/VB)</MenuItem>
+                  <MenuItem value="Very Very Low/Very Very Bad (VVL/VVB)">Very Very Low/Very Very Bad (VVL/VVB)</MenuItem>
+                </Select>
+                <InputLabel style={{ margin: "25px" }} >Storage *</InputLabel>
+                <Select
+
+                  value={slaFormData.storage}
+                  label="Storage"
+                  onChange={handleChange}
+                  name="storage"
+                  variant='outlined'
+
+                >
+                  <MenuItem value="None">None</MenuItem>
+                  <MenuItem value="Extremely High/ Extremely Good (EH/EG)">Extremely High/ Extremely Good (EH/EG)</MenuItem>
+                  <MenuItem value="Very High/Very Good (VH/VG)">Very High/Very Good (VH/VG)</MenuItem>
+                  <MenuItem value="Medium High/ Medium Good (MH/MG)">Medium High/ Medium Good (MH/MG)</MenuItem>
+                  <MenuItem value="Fair/Medium (F/M)">Fair/Medium (F/M)</MenuItem>
+                  <MenuItem value="Medium Low/Medium Bad (ML/MB)">Medium Low/Medium Bad (ML/MB)</MenuItem>
+                  <MenuItem value="Low/Bad (L/B)">Low/Bad (L/B)</MenuItem>
+                  <MenuItem value="Very Low/Very Bad (VL/VB)">Very Low/Very Bad (VL/VB)</MenuItem>
+                  <MenuItem value="Very Very Low/Very Very Bad (VVL/VVB)">Very Very Low/Very Very Bad (VVL/VVB)</MenuItem>
+                </Select>
+
+              </Box>
 
 
-            </MDBModalFooter>
-      </MDBModalContent>
+
+
+
+
+
+              <MDBModalFooter>
+
+                <Link to="/userHome">
+                  <MDBBtn color='secondary' >
+                    Close
+                  </MDBBtn>
+                </Link>
+
+                <MDBBtn color='success' type='submit' onClick={toggleShow}  >Submit</MDBBtn>
+
+
+              </MDBModalFooter>
+            </form>
+          </MDBModalContent>
         </MDBModalDialog>
       </MDBModal>
     </>
@@ -168,4 +316,3 @@ function SLAForm({basicModal,setBasicModal,toggleShow}) {
 }
 
 export default SLAForm;
-    

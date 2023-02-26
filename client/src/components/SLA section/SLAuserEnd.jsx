@@ -43,10 +43,10 @@ const SLAuserEnd = () => {
   return (
     <>
       <MDBModal staticBackdrop tabIndex='-1' show={basicModal} setShow={setBasicModal} >
-      <SLAForm basicModal={basicModal1} setBasicModal={setBasicModal1} toggleShow={toggleShow1} />
+      {/* <SLAForm basicModal={basicModal1} setBasicModal={setBasicModal1} toggleShow={toggleShow1} /> */}
         <MDBModalDialog scrollable size='xl' >
         
-          {!basicModal1 && (<MDBModalContent >
+          <MDBModalContent >
             <MDBModalHeader>
               <MDBModalTitle> <strong>Service-Level Agreement</strong> </MDBModalTitle>
               <Link to="/userHome/filter"><MDBBtn className='btn-close' color='none' onClick={toggleShow} ></MDBBtn></Link>
@@ -147,7 +147,7 @@ const SLAuserEnd = () => {
 
 
             </MDBModalFooter>
-          </MDBModalContent>)}
+          </MDBModalContent>
         </MDBModalDialog>
       </MDBModal>
     </>
