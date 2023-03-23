@@ -13,6 +13,7 @@ import ProviderHome from './components/ProviderSection/ProviderHome';
 import UpdateProInfo from './components/ProviderSection/UpdateQoS/UpdateProInfo';
 import MyResources from './components/UserSection/MyResources/MyResources';
 import SLATemplate from './components/UserSection/SLATemplate/SLATemplate';
+import SLAProposal from './components/ProviderSection/UpdateSLA/SLAProposal';
 
 const App = () => {
 
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/userHome" exact component={UserHome} />
           <Route path="/providerHome" exact component={ProviderHome} />
           <Route path="/providerHome/updateqos" exact component={UpdateProInfo} />
+          <Route path="/providerHome/updatesla" exact component={SLAProposal} />
           <Route path="/userHome/search" exact component={UserSearch} />
           <Route path="/userHome/filter" exact component={ServiceFilter} />
           <Route path="/userHome/myresources" exact component={MyResources} />

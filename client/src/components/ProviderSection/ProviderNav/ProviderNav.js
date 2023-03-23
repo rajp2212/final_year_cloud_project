@@ -38,6 +38,7 @@ const ProviderNav = () => {
           <div className={classes.brandContainer} >
           <Button component={Link} to="/ProviderHome" className="button-30" variant='outlined' >Home</Button>
           <Button component={Link} to="/ProviderHome/updateqos" className="button-30" variant='outlined' >Update QoS</Button>
+          <Button component={Link} to="/ProviderHome/updatesla" className="button-30" variant='outlined' >SLA Proposal</Button>
           </div>
           <Toolbar className={classes.toolbar} >
           

@@ -6,7 +6,7 @@ import { CircularProgress } from '@material-ui/core';
 import { DataContext } from '../../SLAdata';
 import { fetchData } from '../../../api';
 import linguisticVal from '../../LinguisticValues';
-
+import { Link } from 'react-router-dom';
 const SLATemplate = () => {
 	const { slaFormData } = useContext(DataContext);
 	/* const GlobalState={data,setData} */
@@ -83,6 +83,7 @@ const SLATemplate = () => {
 		}
 		let table1 = newData.map((ele) => {
 			let newCsbData = {
+				_id:ele._id,
 				csbName: ele.name,
 				c1: linguisticVal[ele.cpu_capacity],
 				c2: linguisticVal[ele.memory_size],
@@ -100,6 +101,7 @@ const SLATemplate = () => {
 		})
 		let table2 = table1.map((ele) => {
 			let newCsbData = {
+				_id:ele._id,
 				csbName: ele.csbName,
 				c1: {
 					T: Tw(ele.c1.T, newSlaData.c1.T),
@@ -177,12 +179,12 @@ const SLATemplate = () => {
 				let Ffm=Math.abs(table[idx].F - Aminus[idx].F);
 				Dminus=Dminus+(Tfm+Ifm+Ffm);
 			}
-			return {Dp:Dplus,Dm:Dminus,csbName:table.csbName}
+			return {Dp:Dplus,Dm:Dminus,csbName:table.csbName,_id:table._id,}
 		})
 		
 		let finalListDummy=finalTable.map((ele)=>{
 			let Ci=ele.Dm/(ele.Dm + ele.Dp);
-			return {Ci:Ci,csbName:ele.csbName}
+			return {Ci:Ci,csbName:ele.csbName,_id:ele._id,}
 		})
 		
 		sortedData = finalListDummy.sort((a, b) => { return a.Ci < b.Ci; })
@@ -221,8 +223,8 @@ const SLATemplate = () => {
 											<>
 												<tr>
 													<td class="rank">{idx + 1}</td>
-													<td class="team">{ele.csbName}</td>
-													<td class="points">{ele.Ci}</td>
+													<td class="team"><Link to={`/resource/${ele._id}`}>{ele.csbName}</Link ></td>
+													<td class="points">{Math.floor(ele.Ci*100)} %</td>
 
 												</tr>
 											</>

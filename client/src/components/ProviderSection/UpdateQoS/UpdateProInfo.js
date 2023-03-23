@@ -11,16 +11,7 @@ import { signinprovider, signupprovider, updateInfo } from '../../../actions/use
 
 const UpdateProInfo = () => {
     const user = JSON.parse(localStorage.getItem('profile'));
-    const init = {
-        brandName: "",
-        cost: 0,
-        available_VM: 0,
-        network_bandwidth: 0,
-        security_management: "None",
-        flexibility: "None",
-        response_time: 0,
-
-    }
+    
     const classes = useStyles();
 
     const dispatch = useDispatch();
@@ -48,7 +39,7 @@ const UpdateProInfo = () => {
     return (
         <>
             <Navbar />
-            <Container component="main"  style={{position:"relative",left:"22%"}} >
+            <Container component="main"  style={{position:"relative",left:"12%"}} >
                 <Paper className={classes.paper} elevation={3} >
                     <Avatar className={classes.avatar} >
                         <LockOutlinedIcon />

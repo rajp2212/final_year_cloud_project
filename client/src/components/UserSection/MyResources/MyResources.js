@@ -60,7 +60,7 @@ const MyResources = () => {
         {/* <ResourceList/> */}
         
         {
-        !result.length ? <CircularProgress /> : (
+        !result.length ?<><h3>No Data</h3> <CircularProgress /> </>: (
           result.map((data,id)=>{
             return (
               <ResourceList idx={data._id} key={id} heading={data.name} mail={data.email} bandwidth={data.network_bandwidth} security={data.security_management} />
